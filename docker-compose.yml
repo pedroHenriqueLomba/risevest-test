@@ -1,0 +1,31 @@
+version: "1.0"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: api
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:password@db:5432/db
+      - SECRET_JWT_KEY=hX3a2Df5Kr8zLj9pT4wQm1Vc6GyN7vXe
+    networks:
+      - default
+  db:
+    image: postgres:16.3
+    container_name: database
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+    environment:
+      POSTGRES_USER: pedro
+      POSTGRES_PASSWORD: '12345'
+      POSTGRES_DB: risevest_test
+networks:
+  default:
+    driver: bridge
