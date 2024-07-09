@@ -11,7 +11,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://postgres:password@db:5432/db
+      - DATABASE_URL=postgresql://pedro:12345@db:5432/risevest_test
       - SECRET_JWT_KEY=hX3a2Df5Kr8zLj9pT4wQm1Vc6GyN7vXe
     networks:
       - default

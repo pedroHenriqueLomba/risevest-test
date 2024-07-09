@@ -7,6 +7,8 @@ import { AuthService } from "./modules/auth/auth.service";
 import { AuthController } from "./modules/auth/auth.controller";
 import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants } from "./modules/auth/constants";
+import { PrismaService } from './database/prisma/prisma.service';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -16,8 +18,9 @@ import { jwtConstants } from "./modules/auth/constants";
       secret: jwtConstants.secret,
       signOptions: { expiresIn: "3600s" },
     }),
+    DatabaseModule,
   ],
   controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  providers: [AppService, AuthService, PrismaService],
 })
 export class AppModule {}
