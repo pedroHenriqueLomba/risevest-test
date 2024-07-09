@@ -1,4 +1,4 @@
-version: "1.0"
+version: "3.8"
 
 services:
   app:
@@ -15,6 +15,11 @@ services:
       - SECRET_JWT_KEY=hX3a2Df5Kr8zLj9pT4wQm1Vc6GyN7vXe
     networks:
       - default
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+
   db:
     image: postgres:16.3
     container_name: database
@@ -26,6 +31,12 @@ services:
       POSTGRES_USER: pedro
       POSTGRES_PASSWORD: '12345'
       POSTGRES_DB: risevest_test
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+
 networks:
   default:
     driver: bridge
