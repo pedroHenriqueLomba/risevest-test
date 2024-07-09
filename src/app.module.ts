@@ -22,5 +22,6 @@ import { DatabaseModule } from './database/database.module';
   ],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService, PrismaService],
+  exports: [PrismaService],
 })
 export class AppModule {}
