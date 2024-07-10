@@ -1,12 +1,16 @@
 import { IsEmail, IsEnum, IsString, IsStrongPassword } from "class-validator";
 import { IUser } from "../interfaces/user.inteface";
 import { UserRole } from "src/modules/auth/user/user.roles.enum";
+import { EntitiesEnum, IsUnique } from "src/validators/unique.validator";
 
 export class CreateUserDto implements IUser {
   @IsString()
   name: string;
   @IsString()
   @IsEmail()
+  @IsUnique(EntitiesEnum.USER, "email", {
+    message: "Email already exists.",
+  })
   email: string;
   @IsString()
   @IsStrongPassword(

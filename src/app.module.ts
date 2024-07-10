@@ -7,6 +7,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants } from "./modules/auth/constants";
 import { PrismaService } from "./database/prisma/prisma.service";
 import { DatabaseModule } from "./database/database.module";
+import { ValidatorsModule } from "./validators/validators.module";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { DatabaseModule } from "./database/database.module";
       signOptions: { expiresIn: "3600s" },
     }),
     DatabaseModule,
+    ValidatorsModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, PrismaService],
