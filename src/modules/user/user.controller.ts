@@ -13,13 +13,11 @@ import { CreateUserUseCase } from "./usecases/create-user.usecase";
 
 @Controller("user")
 export class UserController {
-  constructor(
-    private readonly createUserUsecase: CreateUserUseCase,
-  ) {}
+  constructor(private readonly createUserUsecase: CreateUserUseCase) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    this.createUserUsecase.execute(createUserDto);
+    return this.createUserUsecase.execute(createUserDto);
   }
 
   @Get()

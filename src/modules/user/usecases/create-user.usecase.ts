@@ -7,10 +7,10 @@ import { UserRepository } from "../schema/user.repository";
 export class CreateUserUseCase {
   constructor(
     @Inject("UserRepository")
-    private readonly userRepository: UserRepository,
-  ){}
-  
-  async execute(userData: CreateUserDto):  Promise<User> {
-    return this.userRepository.create(userData);
+    private readonly userRepository: UserRepository
+  ) {}
+
+  async execute(userData: CreateUserDto): Promise<User> {
+    return await this.userRepository.create(userData);
   }
 }

@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client/extension";
 import { PrismaService } from "../../../database/prisma/prisma.service";
 import { UserRepository } from "./user.repository";
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { IUser } from "../interfaces/user.inteface";
 
 @Injectable()
 export class UserPrismaModel implements UserRepository {
@@ -11,7 +12,11 @@ export class UserPrismaModel implements UserRepository {
 
   private model!: PrismaClient;
 
-  async create(data: any): Promise<any> {
-    return await this.model.create({ data });
+  async create(data: IUser): Promise<any> {
+    try{
+      return await this.model.create({ data });
+    } catch (error) {
+      throw new HttpException("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
