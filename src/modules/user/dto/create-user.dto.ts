@@ -1,9 +1,13 @@
 import { IsEmail, IsEnum, IsString, IsStrongPassword } from "class-validator";
-import { IUser } from "../interfaces/user.inteface";
-import { UserRole } from "src/modules/auth/user/user.roles.enum";
+import { User } from "../entities/user.entity";
 import { EntitiesEnum, IsUnique } from "src/validators/unique.validator";
+import { PickType } from "@nestjs/mapped-types";
 
-export class CreateUserDto implements IUser {
+export class CreateUserDto extends PickType(User, [
+  "name",
+  "email",
+  "password",
+]) {
   @IsString()
   name: string;
   @IsString()
@@ -27,6 +31,4 @@ export class CreateUserDto implements IUser {
     }
   )
   password: string;
-  @IsEnum(UserRole)
-  role: string;
 }
