@@ -26,7 +26,10 @@ export class UserPrismaModel extends UserRepository {
 
   async update(user: User): Promise<any> {
     try {
-      return await this.model.update({ where: { id: Number(user.id) }, data: user });
+      return await this.model.update({
+        where: { id: Number(user.id) },
+        data: user,
+      });
     } catch (error) {
       console.log(error);
       throw new HttpException(
@@ -40,6 +43,17 @@ export class UserPrismaModel extends UserRepository {
     try {
       const user = await this.model.findUnique({ where: { id: Number(id) } });
       return user;
+    } catch (error) {
+      throw new HttpException(
+        "Internal server error",
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
+  async findOne(where: any, select: any): Promise<User> {
+    try {
+      return await this.model.findUnique({ where, select });
     } catch (error) {
       throw new HttpException(
         "Internal server error",

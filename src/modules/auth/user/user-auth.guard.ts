@@ -6,7 +6,7 @@ export class UserGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    console.log('UserGuard')
+    console.log('aqui');
     return true;
   }
 }
