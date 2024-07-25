@@ -13,6 +13,8 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 import { CreateUserUseCase } from "./usecases/create-user.usecase";
 import { UpdateUserUseCase } from "./usecases/update-user.usecase";
 import { UserGuard } from "../auth/user/user-auth.guard";
+import { User } from "../auth/user/user.decorator";
+import { User as UserType} from "./entities/user.entity";
 
 @Controller("user")
 export class UserController {
@@ -32,10 +34,10 @@ export class UserController {
   @Get(":id")
   findOne(@Param("id") id: string) {}
 
-  @Put(":id")
+  @Put()
   @UseGuards(UserGuard)
-  update(@Param("id") id: string, @Body() updatedUserData: UpdateUserDto) {
-    return this.updateUserUsecase.execute(id, updatedUserData);
+  update(@Body() updatedUserData: UpdateUserDto, @User() user: Pick<UserType, "id" | "email" | "name">) {
+    return this.updateUserUsecase.execute(user, updatedUserData);
   }
 
   @Delete(":id")
