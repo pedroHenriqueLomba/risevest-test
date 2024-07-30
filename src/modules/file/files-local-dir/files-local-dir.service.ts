@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { IUploadFilesService } from "../interfaces/upload-files.interface";
+import { IFilesService } from "../interfaces/upload-files.interface";
 
 @Injectable()
-export class UploadFilesLocalDirService implements IUploadFilesService {
+export class FilesLocalDirService implements IFilesService {
   async upload(file: File): Promise<string> {
     return "file-path";
   }

@@ -6,7 +6,7 @@ import { User } from "../user/entities/user.entity";
 import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller("upload-files")
-export class UploadFilesController {
+export class FilesController {
   constructor(
     private readonly uploadFileUsecase: UploadFileUsecase
   ) {}

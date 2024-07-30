@@ -1,3 +1,4 @@
+import { PickType } from "@nestjs/mapped-types";
 import { UserRole } from "@prisma/client";
 
 export class User {
@@ -9,3 +10,5 @@ export class User {
   created_at: Date;
   updated_at: Date;
 }
+
+export class UserTokenData extends PickType(User, ["id", "email", "name"]) {}

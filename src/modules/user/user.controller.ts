@@ -15,6 +15,7 @@ import { UpdateUserUseCase } from "./usecases/update-user.usecase";
 import { UserGuard } from "../auth/user/user-auth.guard";
 import { User as UserDecorator } from "../auth/user/user.decorator";
 import { User } from "./entities/user.entity";
+import { UserTokenData } from "./schema/user.entity";
 
 @Controller("user")
 export class UserController {
@@ -38,7 +39,7 @@ export class UserController {
   @UseGuards(UserGuard)
   update(
     @Body() updatedUserData: UpdateUserDto,
-    @UserDecorator() user: Pick<User, "id" | "email" | "name">
+    @UserDecorator() user: UserTokenData
   ) {
     return this.updateUserUsecase.execute(user, updatedUserData);
   }

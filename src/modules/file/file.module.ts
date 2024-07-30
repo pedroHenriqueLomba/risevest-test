@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { UploadFilesLocalDirService } from "./upload-files-local-dir/upload-files-local-dir.service";
-import { UploadFilesController } from "./upload-files.controller";
+import { FilesLocalDirService } from "./files-local-dir/files-local-dir.service";
+import { FilesController } from "./file.controller";
 import { UploadFileUsecase } from "./usecases/upload-files.usecase";
 import { CriptModule } from "src/cript/cript.module";
 
@@ -10,11 +10,11 @@ import { CriptModule } from "src/cript/cript.module";
   ],
   providers: [
     {
-      provide: "IUploadFilesService",
-      useClass: UploadFilesLocalDirService,
+      provide: "IFilesService",
+      useClass: FilesLocalDirService,
     },
     UploadFileUsecase,
   ],
-  controllers: [UploadFilesController],
+  controllers: [FilesController],
 })
 export class UploadFilesModule {}

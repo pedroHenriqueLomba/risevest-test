@@ -3,6 +3,7 @@ import { CreateUserDto } from "../dto/create-user.dto";
 import { User } from "@prisma/client";
 import { UserRepository } from "../schema/user.repository";
 import { CriptService } from "src/cript/cript.service";
+import { UserTokenData } from "../schema/user.entity";
 
 @Injectable()
 export class CreateUserUseCase {
@@ -12,9 +13,7 @@ export class CreateUserUseCase {
     private readonly criptService: CriptService
   ) {}
 
-  async execute(
-    userData: CreateUserDto
-  ): Promise<Pick<User, "id" | "email" | "name">> {
+  async execute(userData: CreateUserDto): Promise<UserTokenData> {
     userData.password = await this.criptService.stringToHash(userData.password);
     const createdUser = await this.userRepository.create(userData);
     return {
