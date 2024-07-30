@@ -3,7 +3,7 @@ import { UserRepository } from "../schema/user.repository";
 import { UpdateUserDto } from "../dto/update-user.dto";
 import { CriptService } from "src/cript/cript.service";
 import { User } from "../entities/user.entity";
-import { UserTokenData } from "../schema/user.entity";
+import { UserTokenData } from "../entities/user.entity";
 
 @Injectable()
 export class UpdateUserUseCase {

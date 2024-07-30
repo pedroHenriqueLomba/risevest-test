@@ -28,10 +28,10 @@ model User {
   role       UserRole @default(free_user)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  Files      Files[]
+  File       File[]
 }
 
-model Files {
+model File {
   id          Int      @id @default(autoincrement())
   name        String
   path        String

@@ -1,9 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { CreateUserDto } from "../dto/create-user.dto";
-import { User } from "@prisma/client";
 import { UserRepository } from "../schema/user.repository";
 import { CriptService } from "src/cript/cript.service";
-import { UserTokenData } from "../schema/user.entity";
+import { UserTokenData } from "../entities/user.entity";
 
 @Injectable()
 export class CreateUserUseCase {
