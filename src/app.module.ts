@@ -9,7 +9,7 @@ import { DatabaseModule } from "./database/database.module";
 import { ValidatorsModule } from "./validators/validators.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { CriptModule } from "./cript/cript.module";
-import { UploadFilesModule } from './modules/file/file.module';
+import { FilesModule } from './modules/file/file.module';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { UploadFilesModule } from './modules/file/file.module';
     DatabaseModule,
     ValidatorsModule,
     AuthModule,
-    UploadFilesModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [AuthService, PrismaService],
