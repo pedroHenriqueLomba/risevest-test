@@ -10,11 +10,10 @@ export class FilePrismaModel extends FileRepository {
     super();
     this.model = this.prisma.file;
   }
-  private model: PrismaClient;
+  private model!: PrismaClient;
 
   async create(data: Partial<File>): Promise<File> {
     try {
-      console.log(data);
       return await this.model.create({ data });
     } catch (error) {
       console.log(error);

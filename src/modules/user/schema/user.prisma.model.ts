@@ -31,7 +31,6 @@ export class UserPrismaModel extends UserRepository {
         data: user,
       });
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         "Internal server error",
         HttpStatus.INTERNAL_SERVER_ERROR
