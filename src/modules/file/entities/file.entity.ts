@@ -5,6 +5,7 @@ export class File {
     user_id: number;
     description: string;
     size: number;
+    extension: string;
     created_at: Date;
     updated_at: Date;
 }

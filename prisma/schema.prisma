@@ -18,16 +18,26 @@ model User {
   File       File[]
 }
 
+enum EnumExtension {
+  jpg
+  jpeg
+  png
+  json
+  txt
+  pdf
+}
+
 model File {
-  id          Int      @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   name        String
   user_id     Int
-  description String   @default("")
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  description String         @default("")
+  created_at  DateTime       @default(now())
+  updated_at  DateTime       @updatedAt
   size        Int
   identifier  String
-  user        User     @relation(fields: [user_id], references: [id])
+  user        User           @relation(fields: [user_id], references: [id])
+  extension   EnumExtension?
 }
 
 enum UserRole {

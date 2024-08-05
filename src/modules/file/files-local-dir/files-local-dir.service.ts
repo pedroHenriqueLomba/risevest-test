@@ -22,7 +22,6 @@ export class FilesLocalDirService implements IFilesService {
 
     writeFile(filePath, buffer, (err) => {
       if (err) {
-        console.log(err);
         throw new HttpException(
           "Internal server error",
           HttpStatus.INTERNAL_SERVER_ERROR
@@ -33,6 +32,13 @@ export class FilesLocalDirService implements IFilesService {
   }
 
   async remove(filePath: string): Promise<void> {
-    return;
+    try {
+      await fs.unlink(filePath);
+    } catch (err) {
+      throw new HttpException(
+        "Internal server error",
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
   }
 }

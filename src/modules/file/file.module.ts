@@ -5,6 +5,7 @@ import { UploadFileUsecase } from "./usecases/upload-file.usecase";
 import { CriptModule } from "src/cript/cript.module";
 import { FilePrismaModel } from "./schema/file.prisma.model";
 import { DatabaseModule } from "src/database/database.module";
+import { RemoveFileUsecase } from "./usecases/remove-file.usecase";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DatabaseModule } from "src/database/database.module";
       useClass: FilePrismaModel,
     },
     UploadFileUsecase,
+    RemoveFileUsecase
   ],
   controllers: [FileController],
 })

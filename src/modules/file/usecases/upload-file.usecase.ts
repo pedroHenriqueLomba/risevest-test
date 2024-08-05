@@ -20,12 +20,14 @@ export class UploadFileUsecase {
     file: UploadedFile,
     fileData: CreateFileDto
   ) {
+    file = new UploadedFile(file);
     const fileIdentifier = uuidv4();
     const createdFile = await this.fileRepository.create({
       ...fileData,
       identifier: fileIdentifier,
       user_id: user.id,
       size: file.size,
+      extension: file.getExtension(),
     });
     const uploadedFile = new UploadedFile(file);
     const fileExtension = uploadedFile.getExtension();

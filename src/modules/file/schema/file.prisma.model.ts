@@ -16,7 +16,6 @@ export class FilePrismaModel extends FileRepository {
     try {
       return await this.model.create({ data });
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         "Internal server error",
         HttpStatus.INTERNAL_SERVER_ERROR
