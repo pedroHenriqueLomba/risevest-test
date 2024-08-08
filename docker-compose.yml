@@ -11,8 +11,10 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://pedro:12345@db:5432/risevest_test
-      - SECRET_JWT_KEY=hX3a2Df5Kr8zLj9pT4wQm1Vc6GyN7vXe
+      - DATABASE_URL=${DATABASE_URL}
+      - SECRET_JWT_KEY=${SECRET_JWT_KEY}
+      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     networks:
       - default
     volumes:

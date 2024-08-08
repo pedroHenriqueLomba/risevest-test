@@ -22,21 +22,21 @@ export class UploadFileUsecase {
   ) {
     file = new UploadedFile(file);
     const fileIdentifier = uuidv4();
-    const createdFile = await this.fileRepository.create({
-      ...fileData,
-      identifier: fileIdentifier,
-      user_id: user.id,
-      size: file.size,
-      extension: file.getExtension(),
-    });
+    const fileExtension = file.getExtension();
+    // const createdFile = await this.fileRepository.create({
+    //   ...fileData,
+    //   identifier: fileIdentifier,
+    //   user_id: user.id,
+    //   size: file.size,
+    //   extension: fileExtension,
+    // });
     const uploadedFile = new UploadedFile(file);
-    const fileExtension = uploadedFile.getExtension();
     this.uploadFilesService.upload(
       String(user.id),
       fileIdentifier,
       fileExtension,
       uploadedFile.buffer
     );
-    return createdFile;
+    return 'ok';
   }
 }
