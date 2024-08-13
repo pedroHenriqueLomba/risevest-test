@@ -19,6 +19,7 @@ export class CreateUserUseCase {
       id: createdUser.id,
       email: createdUser.email,
       name: createdUser.name,
+      role: createdUser.role,
     };
   }
 }

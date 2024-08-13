@@ -14,7 +14,7 @@ export class LoginUserUseCase {
   async execute(loginData: UserLoginDto) {
     const user = await this.userRepository.findOne(
       { email: loginData.email },
-      { id: true, email: true, name: true, password: true }
+      { id: true, email: true, name: true, password: true, role: true }
     );
     if (!user) {
       throw new HttpException("Invalid credentials", HttpStatus.UNAUTHORIZED);

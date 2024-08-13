@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
+import { UserTokenData } from "src/modules/user/entities/user.entity";
 
 @Injectable()
 export class CriptService {
@@ -10,8 +11,8 @@ export class CriptService {
     return this.jwtService.sign(obj);
   }
 
-  async JWTToString(jwt: string): Promise<Object> {
-   return this.jwtService.verify(jwt); 
+  async JWTToString(jwt: string): Promise<UserTokenData> {
+    return this.jwtService.verify(jwt);
   }
 
   async stringToHash(str: string): Promise<string> {

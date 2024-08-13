@@ -5,6 +5,7 @@ import { DatabaseModule } from "src/database/database.module";
 import { CreateUserUseCase } from "./usecases/create-user.usecase";
 import { UpdateUserUseCase } from "./usecases/update-user.usecase";
 import { CriptModule } from "src/cript/cript.module";
+import { UpdateUserWithAdminUseCase } from "./usecases/update-user-with-admin.usecase";
 
 @Module({
   imports: [DatabaseModule, CriptModule],
@@ -13,6 +14,7 @@ import { CriptModule } from "src/cript/cript.module";
     { provide: "UserRepository", useClass: UserPrismaModel },
     CreateUserUseCase,
     UpdateUserUseCase,
+    UpdateUserWithAdminUseCase,
   ],
   exports: ["UserRepository"],
 })
