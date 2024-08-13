@@ -33,7 +33,7 @@ export class FileController {
     @Body() body: CreateFileDto,
     @Res() res
   ) {
-    const createdFile = this.uploadFileUsecase.execute(user, file, body);
+    const createdFile = await this.uploadFileUsecase.execute(user, file, body);
     return res.status(201).send(createdFile);
   }
 

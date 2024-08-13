@@ -24,9 +24,12 @@ export class FilesS3Service implements IFilesService {
     });
   }
   async remove(filePath: string): Promise<void> {
-    this.S3Client.deleteObject({
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: filePath,
-    });
+    this.S3Client.deleteObject(
+      {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: filePath,
+      },
+      (err, data) => {}
+    );
   }
 }
