@@ -4,6 +4,7 @@ import {
   Delete,
   Param,
   Post,
+  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -29,17 +30,21 @@ export class FileController {
   async createFile(
     @UserDecorator() user: User,
     @UploadedFile() file,
-    @Body() body: CreateFileDto
+    @Body() body: CreateFileDto,
+    @Res() res
   ) {
-    return this.uploadFileUsecase.execute(user, file, body);
+    const createdFile = this.uploadFileUsecase.execute(user, file, body);
+    return res.status(201).send(createdFile);
   }
 
   @UseGuards(UserGuard)
   @Delete(":fileId")
   async deleteFile(
-    @Param() fileId: string,
-    @UserDecorator() user: UserTokenData
+    @Param("fileId") fileId: string,
+    @UserDecorator() user: UserTokenData,
+    @Res() res
   ) {
-    return this.removeFileUsecase.execute(fileId, user);
+    await this.removeFileUsecase.execute(fileId, user);
+    return res.status(204).send();
   }
 }

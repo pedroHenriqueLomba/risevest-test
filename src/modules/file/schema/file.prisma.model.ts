@@ -30,7 +30,6 @@ export class FilePrismaModel extends FileRepository {
         data: data,
       });
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         "Internal server error",
         HttpStatus.INTERNAL_SERVER_ERROR
@@ -50,9 +49,20 @@ export class FilePrismaModel extends FileRepository {
     }
   }
 
-  async findOne(where: any, select: any): Promise<File> {
+  async findOne(where: Partial<File>, select: Partial<File>): Promise<File> {
     try {
       return await this.model.findUnique({ where, select });
+    } catch (error) {
+      throw new HttpException(
+        "Internal server error",
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
+  async deleteOne(where: any): Promise<void> {
+    try {
+      await this.model.delete({ where });
     } catch (error) {
       throw new HttpException(
         "Internal server error",

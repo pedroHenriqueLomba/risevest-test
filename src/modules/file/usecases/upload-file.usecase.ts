@@ -5,6 +5,7 @@ import { IFilesService } from "../interfaces/file.service.interface";
 import { CreateFileDto } from "../dto/create-file.dto";
 import { UploadedFile } from "../entities/uploaded-file";
 import { v4 as uuidv4 } from "uuid";
+import { File } from "../entities/file.entity";
 
 @Injectable()
 export class UploadFileUsecase {
@@ -19,17 +20,17 @@ export class UploadFileUsecase {
     user: UserTokenData,
     file: UploadedFile,
     fileData: CreateFileDto
-  ) {
+  ): Promise<File> {
     file = new UploadedFile(file);
     const fileIdentifier = uuidv4();
     const fileExtension = file.getExtension();
-    // const createdFile = await this.fileRepository.create({
-    //   ...fileData,
-    //   identifier: fileIdentifier,
-    //   user_id: user.id,
-    //   size: file.size,
-    //   extension: fileExtension,
-    // });
+    const createdFile = await this.fileRepository.create({
+      ...fileData,
+      identifier: fileIdentifier,
+      user_id: user.id,
+      size: file.size,
+      extension: fileExtension,
+    });
     const uploadedFile = new UploadedFile(file);
     this.uploadFilesService.upload(
       String(user.id),
@@ -37,6 +38,6 @@ export class UploadFileUsecase {
       fileExtension,
       uploadedFile.buffer
     );
-    return 'ok';
+    return createdFile;
   }
 }

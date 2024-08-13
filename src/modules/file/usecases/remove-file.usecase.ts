@@ -13,15 +13,18 @@ export class RemoveFileUsecase {
   ) {}
 
   async execute(fileId: string, user: UserTokenData): Promise<void> {
-    const file = await this.fileRepository.findById(fileId);
+    const file = await this.fileRepository.findOne(
+      { identifier: fileId },
+      { user_id: true, extension: true, identifier: true }
+    );
     if (!file) {
       throw new HttpException("File not found", HttpStatus.NOT_FOUND);
     }
     if (file.user_id !== user.id) {
       throw new HttpException("Unauthorized", HttpStatus.UNAUTHORIZED);
     }
-    const filePath = `public/${file.user_id}/${file.id}.${file.extension}`;
+    const filePath = `${user.id}/${file.identifier}.${file.extension}`;
     await this.filesService.remove(filePath);
-    return;
+    await this.fileRepository.deleteOne({ identifier: fileId });
   }
 }

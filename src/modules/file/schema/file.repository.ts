@@ -8,4 +8,5 @@ export abstract class FileRepository {
     abstract update(data: any): Promise<File>;
     abstract findById(id: string): Promise<File>;
     abstract findOne(where: any, select: any): Promise<File>;
+    abstract deleteOne(where: any): Promise<void>;
 }

@@ -35,7 +35,7 @@ model File {
   created_at  DateTime       @default(now())
   updated_at  DateTime       @updatedAt
   size        Int
-  identifier  String
+  identifier  String         @unique
   user        User           @relation(fields: [user_id], references: [id])
   extension   EnumExtension?
 }
